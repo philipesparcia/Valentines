@@ -64,14 +64,21 @@
         .slide img, .slide2 img { width: 100%; height: 100%; object-fit: cover; }
         .active { opacity: 1; }
 
+        /* Two buttons side by side */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
         .btn-love { 
             background: linear-gradient(45deg, var(--primary-pink), var(--soft-pink)); 
-            color: white; border: none; padding: 18px; font-size: 1.2rem; 
-            border-radius: 50px; cursor: pointer; font-weight: 600; width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); margin-top: 20px;
+            color: white; border: none; padding: 15px 5px; font-size: 1rem; 
+            border-radius: 50px; cursor: pointer; font-weight: 600; flex: 1;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
             transition: transform 0.2s;
         }
-        .btn-love:hover { transform: scale(1.02); }
+        .btn-love:hover { transform: scale(1.05); }
 
         #celebration { 
             display: none; 
@@ -122,11 +129,15 @@
             </div>
             <h1>Will you be my Valentine Date Babii Darla Moya?</h1>
             
-            <form action="https://formsubmit.co/philip.esparcia@gmail.com" method="POST" onsubmit="handleYesClick()">
+            <form id="loveForm" action="https://formsubmit.co/philip.esparcia@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="Babii Darla Accepted! ❤️">
-                <input type="hidden" name="Message" value="Darla said YES! I love you Philip!">
+                <input type="hidden" name="Message" value="Darla Moya said YES! She loves you Philip!">
                 <input type="hidden" name="_next" value="https://philip-esparcia.github.io/for-darla/">
-                <button type="submit" class="btn-love">Yes! ❤️</button>
+                
+                <div class="button-group">
+                    <button type="button" class="btn-love" onclick="submitChoice('Yes!')">Yes!</button>
+                    <button type="button" class="btn-love" onclick="submitChoice('Of course!')">Of course!</button>
+                </div>
             </form>
         </div>
     </div>
@@ -160,7 +171,7 @@
     </div>
 
     <script>
-        // Hearts animation
+        // Floating Hearts Background
         const bg = document.getElementById('bgHearts');
         for (let i = 0; i < 15; i++) {
             const h = document.createElement('div');
@@ -170,7 +181,7 @@
             bg.appendChild(h);
         }
 
-        // Sliders logic
+        // Sliders
         function setupSlider(selector) {
             let cur = 0;
             const slides = document.querySelectorAll(selector);
@@ -183,14 +194,19 @@
         setupSlider('.slide');
         setupSlider('.slide2');
 
-        // Logic for clicking Yes
-        function handleYesClick() {
+        // Logic for clicking either button
+        function submitChoice(val) {
             // Play music
             document.getElementById('mySong').play();
-            // Show celebration page
+            
+            // Show the gallery
             document.getElementById('celebration').style.display = 'flex';
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Submit the form
+            setTimeout(() => {
+                document.getElementById('loveForm').submit();
+            }, 1500);
         }
     </script>
 </body>
