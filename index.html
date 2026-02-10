@@ -64,13 +64,14 @@
         .slide img, .slide2 img { width: 100%; height: 100%; object-fit: cover; }
         .active { opacity: 1; }
 
-        .buttons { display: flex; gap: 10px; margin-top: 25px; }
-        button { 
+        .btn-love { 
             background: linear-gradient(45deg, var(--primary-pink), var(--soft-pink)); 
-            color: white; border: none; padding: 15px 5px; font-size: 1rem; 
-            border-radius: 50px; cursor: pointer; font-weight: 600; flex: 1; 
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            color: white; border: none; padding: 18px; font-size: 1.2rem; 
+            border-radius: 50px; cursor: pointer; font-weight: 600; width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); margin-top: 20px;
+            transition: transform 0.2s;
         }
+        .btn-love:hover { transform: scale(1.02); }
 
         #celebration { 
             display: none; 
@@ -96,9 +97,7 @@
             text-align: center;
         }
 
-        .message-box h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 10px; }
-        .heart-anim { font-size: 50px; animation: beat 0.6s infinite alternate; }
-        @keyframes beat { from { transform: scale(1); } to { transform: scale(1.1); } }
+        .message-box h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; }
         .heart-bg { position: absolute; color: white; opacity: 0.3; animation: float 5s linear infinite; }
         @keyframes float { 0% { transform: translateY(110vh); } 100% { transform: translateY(-10vh); } }
     </style>
@@ -122,18 +121,15 @@
                 <div class="slide"><img src="Darla5.jpg"></div>
             </div>
             <h1>Will you be my Valentine Date Babii Darla Moya?</h1>
-            <div class="buttons">
-                <button onclick="sendLove()">Yes!</button>
-                <button onclick="sendLove()">Of course!</button>
-            </div>
+            
+            <form action="https://formsubmit.co/philip.esparcia@gmail.com" method="POST" onsubmit="handleYesClick()">
+                <input type="hidden" name="_subject" value="Babii Darla Accepted! ❤️">
+                <input type="hidden" name="Message" value="Darla said YES! I love you Philip!">
+                <input type="hidden" name="_next" value="https://philip-esparcia.github.io/for-darla/">
+                <button type="submit" class="btn-love">Yes! ❤️</button>
+            </form>
         </div>
     </div>
-
-    <form id="loveForm" action="https://formsubmit.co/el/cixoyu" method="POST" style="display:none;">
-        <input type="hidden" name="_subject" value="Babii Darla Accepted! ❤️">
-        <input type="hidden" name="Message" value="Darla Moya your fiancee has accepted your invitation she said i love you hehe">
-        <input type="hidden" name="_next" value="https://philip-esparcia.github.io/for-darla/">
-    </form>
 
     <div id="celebration">
         <div class="container" style="background: transparent; border: none; box-shadow: none;">
@@ -160,11 +156,11 @@
             <h2>I Love You, Babii!</h2>
             <p>Our <b>first Valentine's as your fiancé</b> is a dream come true.</p>
             <p>You make me the <b>luckiest man alive</b>, and I promise to love you more and more every single day.</p>
-            <div class="heart-anim">💖</div>
         </div>
     </div>
 
     <script>
+        // Hearts animation
         const bg = document.getElementById('bgHearts');
         for (let i = 0; i < 15; i++) {
             const h = document.createElement('div');
@@ -174,37 +170,27 @@
             bg.appendChild(h);
         }
 
-        let cur1 = 0; 
-        const s1 = document.querySelectorAll('.slide');
-        setInterval(() => {
-            s1[cur1].classList.remove('active');
-            cur1 = (cur1 + 1) % s1.length;
-            s1[cur1].classList.add('active');
-        }, 3000);
+        // Sliders logic
+        function setupSlider(selector) {
+            let cur = 0;
+            const slides = document.querySelectorAll(selector);
+            setInterval(() => {
+                slides[cur].classList.remove('active');
+                cur = (cur + 1) % slides.length;
+                slides[cur].classList.add('active');
+            }, 3000);
+        }
+        setupSlider('.slide');
+        setupSlider('.slide2');
 
-        let cur2 = 0; 
-        const s2 = document.querySelectorAll('.slide2');
-        setInterval(() => {
-            if(s2.length > 0) {
-                s2[cur2].classList.remove('active');
-                cur2 = (cur2 + 1) % s2.length;
-                s2[cur2].classList.add('active');
-            }
-        }, 3000);
-
-        function sendLove() {
-            const audio = document.getElementById('mySong');
-            const form = document.getElementById('loveForm');
-            const celebration = document.getElementById('celebration');
-
-            audio.play().catch(e => console.log("Audio blocked"));
-            celebration.style.display = 'flex';
+        // Logic for clicking Yes
+        function handleYesClick() {
+            // Play music
+            document.getElementById('mySong').play();
+            // Show celebration page
+            document.getElementById('celebration').style.display = 'flex';
+            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Standard submission to fix the "Form should POST" error
-            setTimeout(() => {
-                form.submit();
-            }, 1500);
         }
     </script>
 </body>
