@@ -64,7 +64,6 @@
         .slide img, .slide2 img { width: 100%; height: 100%; object-fit: cover; }
         .active { opacity: 1; }
 
-        /* Two buttons side by side */
         .button-group {
             display: flex;
             gap: 10px;
@@ -171,7 +170,6 @@
     </div>
 
     <script>
-        // Floating Hearts Background
         const bg = document.getElementById('bgHearts');
         for (let i = 0; i < 15; i++) {
             const h = document.createElement('div');
@@ -181,7 +179,6 @@
             bg.appendChild(h);
         }
 
-        // Sliders
         function setupSlider(selector) {
             let cur = 0;
             const slides = document.querySelectorAll(selector);
@@ -194,19 +191,20 @@
         setupSlider('.slide');
         setupSlider('.slide2');
 
-        // Logic for clicking either button
         function submitChoice(val) {
-            // Play music
+            // STEP 1: Show the surprise immediately
             document.getElementById('mySong').play();
-            
-            // Show the gallery
             document.getElementById('celebration').style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Submit the form
+            // STEP 2: Send email in the background after 2 seconds
             setTimeout(() => {
-                document.getElementById('loveForm').submit();
-            }, 1500);
+                try {
+                    document.getElementById('loveForm').submit();
+                } catch (e) {
+                    console.log("Email background error avoided");
+                }
+            }, 2000);
         }
     </script>
 </body>
