@@ -19,7 +19,7 @@
             min-height: 100vh; 
             margin: 0; 
             font-family: 'Poppins', sans-serif; 
-            display: block; /* Changed to allow normal scrolling */
+            display: block;
             overflow-x: hidden;
         }
 
@@ -29,7 +29,6 @@
             z-index: 0; pointer-events: none; 
         }
 
-        /* Center the card on the page while allowing scroll */
         .wrapper {
             display: flex;
             justify-content: center;
@@ -74,7 +73,6 @@
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
         }
 
-        /* CELEBRATION PAGE - PINK & SCROLLABLE */
         #celebration { 
             display: none; 
             position: fixed; 
@@ -118,6 +116,8 @@
     </style>
 </head>
 <body>
+
+    <audio id="mySong" src="music.mp3" loop></audio>
 
     <div class="bg-hearts" id="bgHearts"></div>
 
@@ -175,11 +175,15 @@
         }, 3000);
 
         function sendLove() {
+            // Start the music
+            const audio = document.getElementById('mySong');
+            audio.play().catch(error => console.log("Audio couldn't play automatically."));
+
             const form = document.getElementById('loveForm');
             fetch(form.action, { method: "POST", body: new FormData(form) });
             
             document.getElementById('celebration').style.display = 'flex';
-            window.scrollTo(0, 0); // Reset scroll to top of second page
+            window.scrollTo(0, 0); 
         }
     </script>
 </body>
