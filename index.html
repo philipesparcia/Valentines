@@ -128,11 +128,9 @@
             </div>
             <h1>Will you be my Valentine Date Babii Darla Moya?</h1>
             
-            <form id="loveForm" action="https://formsubmit.co/philip.esparcia@gmail.com" method="POST">
+            <form id="loveForm">
                 <input type="hidden" name="_subject" value="Babii Darla Accepted! ❤️">
                 <input type="hidden" name="Message" value="Darla Moya said YES! She loves you Philip!">
-                <input type="hidden" name="_next" value="https://philip-esparcia.github.io/for-darla/">
-                
                 <div class="button-group">
                     <button type="button" class="btn-love" onclick="submitChoice('Yes!')">Yes!</button>
                     <button type="button" class="btn-love" onclick="submitChoice('Of course!')">Of course!</button>
@@ -192,19 +190,19 @@
         setupSlider('.slide2');
 
         function submitChoice(val) {
-            // STEP 1: Show the surprise immediately
+            // 1. Play music and show gallery IMMEDIATELY
             document.getElementById('mySong').play();
             document.getElementById('celebration').style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // STEP 2: Send email in the background after 2 seconds
-            setTimeout(() => {
-                try {
-                    document.getElementById('loveForm').submit();
-                } catch (e) {
-                    console.log("Email background error avoided");
-                }
-            }, 2000);
+            // 2. Silent Background Email
+            const formData = new FormData(document.getElementById('loveForm'));
+            fetch("https://formsubmit.co/ajax/philip.esparcia@gmail.com", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => console.log("Email request sent"))
+            .catch(error => console.log("Silent error handled"));
         }
     </script>
 </body>
