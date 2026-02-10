@@ -19,7 +19,6 @@
             min-height: 100vh; 
             margin: 0; 
             font-family: 'Poppins', sans-serif; 
-            display: block;
             overflow-x: hidden;
         }
 
@@ -33,28 +32,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 0;
+            padding: 20px 0;
             min-height: 100vh;
         }
 
         .container { 
             text-align: center; 
             background: white; 
-            padding: 25px; 
+            padding: 20px; 
             border-radius: 40px; 
             box-shadow: 0 20px 50px rgba(255, 77, 109, 0.3); 
-            max-width: 600px; 
-            width: 90%; 
+            max-width: 500px; 
+            width: 85%; 
             border: 6px solid #ffb3c1; 
             z-index: 1; 
             position: relative; 
         }
 
-        h1 { color: var(--primary-pink); font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin: 15px 0; }
+        h1 { color: var(--primary-pink); font-family: 'Dancing Script', cursive; font-size: 1.8rem; margin: 15px 0; }
 
         .slider { 
             width: 100%; 
-            height: 500px; 
+            height: 500px; /* Tall height to show your engagement photos perfectly */
             position: relative; 
             overflow: hidden; 
             border-radius: 30px; 
@@ -65,15 +64,13 @@
         .slide img, .slide2 img { width: 100%; height: 100%; object-fit: cover; }
         .active { opacity: 1; }
 
-        .buttons { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+        .buttons { display: flex; gap: 10px; margin-top: 25px; }
         button { 
             background: linear-gradient(45deg, var(--primary-pink), var(--soft-pink)); 
-            color: white; border: none; padding: 18px 20px; font-size: 1.1rem; 
+            color: white; border: none; padding: 15px 5px; font-size: 1rem; 
             border-radius: 50px; cursor: pointer; font-weight: 600; flex: 1; 
             box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
-            transition: transform 0.2s;
         }
-        button:hover { transform: scale(1.05); }
 
         #celebration { 
             display: none; 
@@ -88,24 +85,20 @@
         }
 
         .message-box {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            padding: 30px;
+            padding: 25px;
             border-radius: 30px;
             color: white;
-            max-width: 500px;
+            max-width: 450px;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            margin-top: 30px;
-            margin-bottom: 60px;
+            margin: 20px 0 50px 0;
             text-align: center;
         }
 
-        .message-box h2 { font-family: 'Dancing Script', cursive; font-size: 3rem; margin: 0; }
-        .message-box p { font-size: 1.2rem; line-height: 1.6; font-weight: 400; }
-
-        .heart-anim { font-size: 60px; animation: beat 0.6s infinite alternate; margin-top: 15px; }
-        @keyframes beat { from { transform: scale(1); } to { transform: scale(1.2); } }
-        
+        .message-box h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 10px; }
+        .heart-anim { font-size: 50px; animation: beat 0.6s infinite alternate; }
+        @keyframes beat { from { transform: scale(1); } to { transform: scale(1.1); } }
         .heart-bg { position: absolute; color: white; opacity: 0.3; animation: float 5s linear infinite; }
         @keyframes float { 0% { transform: translateY(110vh); } 100% { transform: translateY(-10vh); } }
     </style>
@@ -145,20 +138,20 @@
         <div class="container" style="background: transparent; border: none; box-shadow: none;">
             <div class="slider">
                 <div class="slide2 active"><img src="baba1.jpg"></div>
-                <div class="slide2"><img src="baba2.JPEG"></div>
-                <div class="slide2"><img src="baba3.JPEG"></div>
-                <div class="slide2"><img src="baba4.JPEG"></div>
-                <div class="slide2"><img src="baba5.JPEG"></div>
-                <div class="slide2"><img src="baba6.JPEG"></div>
-                <div class="slide2"><img src="baba7.JPEG"></div>
-                <div class="slide2"><img src="baba8.JPEG"></div>
-                <div class="slide2"><img src="baba9.JPEG"></div>
-                <div class="slide2"><img src="baba10.JPEG"></div>
-                <div class="slide2"><img src="baba11.JPEG"></div>
-                <div class="slide2"><img src="baba12.JPEG"></div>
-                <div class="slide2"><img src="baba13.JPEG"></div>
-                <div class="slide2"><img src="baba14.JPEG"></div>
-                <div class="slide2"><img src="baba15.JPEG"></div>
+                <div class="slide2"><img src="baba2.jpeg"></div>
+                <div class="slide2"><img src="baba3.jpeg"></div>
+                <div class="slide2"><img src="baba4.jpeg"></div>
+                <div class="slide2"><img src="baba5.jpeg"></div>
+                <div class="slide2"><img src="baba6.jpeg"></div>
+                <div class="slide2"><img src="baba7.jpeg"></div>
+                <div class="slide2"><img src="baba8.jpeg"></div>
+                <div class="slide2"><img src="baba9.jpeg"></div>
+                <div class="slide2"><img src="baba10.jpeg"></div>
+                <div class="slide2"><img src="baba11.jpeg"></div>
+                <div class="slide2"><img src="baba12.jpeg"></div>
+                <div class="slide2"><img src="baba13.jpeg"></div>
+                <div class="slide2"><img src="baba14.jpeg"></div>
+                <div class="slide2"><img src="baba15.jpeg"></div>
             </div>
         </div>
         
@@ -172,7 +165,7 @@
 
     <script>
         const bg = document.getElementById('bgHearts');
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 15; i++) {
             const h = document.createElement('div');
             h.className = 'heart-bg'; h.innerHTML = '❤️';
             h.style.left = Math.random() * 100 + 'vw';
