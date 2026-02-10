@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Babii Darla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #fff0f3; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0; pointer-events: none; }
+        .heart-bg { position: absolute; color: rgba(255, 77, 109, 0.3); font-size: 20px; animation: float 6s linear infinite; }
+        @keyframes float { 0% { transform: translateY(110vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+        .container { text-align: center; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 40px rgba(255, 77, 109, 0.25); max-width: 450px; width: 90%; border: 4px solid #ffb3c1; z-index: 1; position: relative; }
+        h1 { color: #ff4d6d; font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin: 20px 0; }
+        .slider { width: 100%; height: 450px; position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .active { opacity: 1; }
+        .buttons { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
+        button { background: linear-gradient(45deg, #ff4d6d, #ff758f); color: white; border: none; padding: 15px 25px; font-size: 1.1rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 600; flex: 1; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3); }
+        button:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 77, 109, 0.5); }
+        #celebration { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .heart-anim { font-size: 100px; animation: beat 0.8s infinite alternate; }
+        @keyframes beat { from { transform: scale(1); } to { transform: scale(1.2); } }
+    </style>
+</head>
+<body>
+
+    <div class="bg-hearts" id="bgHearts"></div>
+
+    <div class="container">
+        <div class="slider">
+            <div class="slide active"><img src="Darla6.jpg"></div>
+            <div class="slide"><img src="Darla1.jpg"></div>
+            <div class="slide"><img src="Darla2.jpg"></div>
+            <div class="slide"><img src="Darla3.jpg"></div>
+            <div class="slide"><img src="Darla4.jpg"></div>
+            <div class="slide"><img src="Darla5.jpg"></div>
+        </div>
+        
+        <h1>Will you be my Valentine Date Babii Darla Moya?</h1>
+        
+        <div class="buttons">
+            <button onclick="sendLove()">Yes!</button>
+            <button onclick="sendLove()">Of course!</button>
+        </div>
+    </div>
+
+    <form id="loveForm" action="https://formsubmit.co/philip.esparcia@gmail.com" method="POST" style="display:none;">
+        <input type="hidden" name="_subject" value="Valentine Accepted! ❤️">
+        <input type="hidden" name="Message" value="Darla Moya your fiancee has accepted your invitation she said i love you hehe">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+    </form>
+
+    <div id="celebration">
+        <div class="heart-anim">💖</div>
+        <h1 style="color: #ff4d6d; font-family: 'Dancing Script', cursive; font-size: 3rem;">I Love You, Babii!</h1>
+        <p style="font-size: 1.2rem; color: #555;">I can't wait for our Valentine's Date!</p>
+    </div>
+
+    <script>
+        // Floating hearts
+        const bg = document.getElementById('bgHearts');
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart-bg';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            bg.appendChild(heart);
+        }
+
+        // Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3500);
+
+        // SILENT EMAIL SENDING
+        function sendLove() {
+            const form = document.getElementById('loveForm');
+            const data = new FormData(form);
+
+            fetch(form.action, {
+                method: "POST",
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            document.getElementById('celebration').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
