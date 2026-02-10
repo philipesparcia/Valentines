@@ -52,7 +52,6 @@
 
         h1 { color: var(--primary-pink); font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin: 15px 0; }
 
-        /* WIDER PICTURE BOX */
         .slider { 
             width: 100%; 
             height: 500px; 
@@ -62,8 +61,8 @@
             box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2); 
         }
 
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide, .slide2 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slide img, .slide2 img { width: 100%; height: 100%; object-fit: cover; }
         .active { opacity: 1; }
 
         .buttons { display: flex; justify-content: center; gap: 15px; margin-top: 25px; }
@@ -76,7 +75,6 @@
         }
         button:hover { transform: scale(1.05); }
 
-        /* PINK SCROLLABLE CELEBRATION PAGE */
         #celebration { 
             display: none; 
             position: fixed; 
@@ -89,15 +87,6 @@
             padding: 40px 20px;
         }
 
-        .baba-photo {
-            width: 90%;
-            max-width: 450px;
-            border-radius: 25px;
-            border: 10px solid white;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-        }
-
         .message-box {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
@@ -106,6 +95,7 @@
             color: white;
             max-width: 500px;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 30px;
             margin-bottom: 60px;
             text-align: center;
         }
@@ -118,19 +108,17 @@
         
         .heart-bg { position: absolute; color: white; opacity: 0.3; animation: float 5s linear infinite; }
         @keyframes float { 0% { transform: translateY(110vh); } 100% { transform: translateY(-10vh); } }
-
-        .music-note { font-size: 0.8rem; color: var(--soft-pink); margin-top: 10px; display: block; }
     </style>
 </head>
 <body>
 
-    <audio id="mySong" preload="auto">
+    <audio id="mySong" preload="auto" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <div class="bg-hearts" id="bgHearts"></div>
 
-    <div class="wrapper">
+    <div class="wrapper" id="page1">
         <div class="container">
             <div class="slider">
                 <div class="slide active"><img src="Darla6.jpg"></div>
@@ -140,25 +128,35 @@
                 <div class="slide"><img src="Darla4.jpg"></div>
                 <div class="slide"><img src="Darla5.jpg"></div>
             </div>
-            
             <h1>Will you be my Valentine Date Babii Darla Moya?</h1>
-            
             <div class="buttons">
                 <button onclick="sendLove()">Yes!</button>
                 <button onclick="sendLove()">Of course!</button>
             </div>
-            <span class="music-note">♫ (Turn on sound)</span>
         </div>
     </div>
 
     <form id="loveForm" action="https://formsubmit.co/philip.esparcia@gmail.com" method="POST" style="display:none;">
         <input type="hidden" name="_subject" value="Babii Darla Accepted! ❤️">
         <input type="hidden" name="Message" value="Darla Moya your fiancee has accepted your invitation she said i love you hehe">
-        <input type="hidden" name="_captcha" value="false">
     </form>
 
     <div id="celebration">
-        <img src="baba1.jpg" alt="Our Special Photo" class="baba-photo">
+        <div class="container" style="background: transparent; border: none; box-shadow: none;">
+            <div class="slider">
+                <div class="slide2 active"><img src="baba1.jpg"></div>
+                <div class="slide2"><img src="baba2.JPEG"></div>
+                <div class="slide2"><img src="baba3.JPEG"></div>
+                <div class="slide2"><img src="baba4.JPEG"></div>
+                <div class="slide2"><img src="baba5.JPEG"></div>
+                <div class="slide2"><img src="baba6.JPEG"></div>
+                <div class="slide2"><img src="baba7.JPEG"></div>
+                <div class="slide2"><img src="baba8.JPEG"></div>
+                <div class="slide2"><img src="baba9.JPEG"></div>
+                <div class="slide2"><img src="baba10.JPEG"></div>
+                <div class="slide2"><img src="baba11.JPEG"></div>
+            </div>
+        </div>
         
         <div class="message-box">
             <h2>I Love You, Babii!</h2>
@@ -169,41 +167,38 @@
     </div>
 
     <script>
-        // Generate Floating Hearts
         const bg = document.getElementById('bgHearts');
         for (let i = 0; i < 25; i++) {
             const h = document.createElement('div');
             h.className = 'heart-bg'; h.innerHTML = '❤️';
             h.style.left = Math.random() * 100 + 'vw';
             h.style.animationDelay = Math.random() * 5 + 's';
-            h.style.fontSize = (Math.random() * 20 + 10) + 'px';
             bg.appendChild(h);
         }
 
-        // Image Slider Logic
-        let cur = 0; 
-        const s = document.querySelectorAll('.slide');
+        let cur1 = 0; 
+        const s1 = document.querySelectorAll('.slide');
         setInterval(() => {
-            s[cur].classList.remove('active');
-            cur = (cur + 1) % s.length;
-            s[cur].classList.add('active');
+            s1[cur1].classList.remove('active');
+            cur1 = (cur1 + 1) % s1.length;
+            s1[cur1].classList.add('active');
         }, 3000);
 
-        // Core Function: Play Music, Send Email, and Change Page
-        function sendLove() {
-            // 1. Play Music
-            const audio = document.getElementById('mySong');
-            audio.play().catch(e => console.log("Audio play blocked by browser."));
+        let cur2 = 0; 
+        const s2 = document.querySelectorAll('.slide2');
+        setInterval(() => {
+            if(s2.length > 0) {
+                s2[cur2].classList.remove('active');
+                cur2 = (cur2 + 1) % s2.length;
+                s2[cur2].classList.add('active');
+            }
+        }, 3000);
 
-            // 2. Background Email Send
+        function sendLove() {
+            const audio = document.getElementById('mySong');
+            audio.play().catch(e => console.log("Audio blocked"));
             const form = document.getElementById('loveForm');
-            fetch(form.action, { 
-                method: "POST", 
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            });
-            
-            // 3. Switch to Pink Page
+            fetch(form.action, { method: "POST", body: new FormData(form) });
             document.getElementById('celebration').style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
