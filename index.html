@@ -132,6 +132,7 @@
     <form id="loveForm" action="https://formsubmit.co/cixoyu" method="POST" style="display:none;">
         <input type="hidden" name="_subject" value="Babii Darla Accepted! ❤️">
         <input type="hidden" name="Message" value="Darla Moya your fiancee has accepted your invitation she said i love you hehe">
+        <input type="hidden" name="_next" value="https://philip-esparcia.github.io/for-darla/">
     </form>
 
     <div id="celebration">
@@ -193,11 +194,20 @@
 
         function sendLove() {
             const audio = document.getElementById('mySong');
-            audio.play().catch(e => console.log("Audio blocked"));
             const form = document.getElementById('loveForm');
-            fetch(form.action, { method: "POST", body: new FormData(form) });
-            document.getElementById('celebration').style.display = 'flex';
+            const celebration = document.getElementById('celebration');
+
+            // Play music immediately
+            audio.play().catch(e => console.log("Audio blocked"));
+
+            // Show celebration UI immediately
+            celebration.style.display = 'flex';
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Submit form to ensure email is sent
+            setTimeout(() => {
+                form.submit();
+            }, 1000);
         }
     </script>
 </body>
